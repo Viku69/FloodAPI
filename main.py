@@ -39,20 +39,15 @@ def load_model(model_path: str):
 app = FastAPI()
 
 #CORS for Local Development and Connection
-origins = [
-    "http://localhost:3000",
-    "http://localhost:8080",
-]
 
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],  # Allow all origins
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
 )
-
 
 model_path = os.getenv("MODEL_PATH", "FloodRisk.pkl")
 model = load_model(model_path)
